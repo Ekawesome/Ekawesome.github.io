@@ -37,10 +37,23 @@
 				text-align:center;
 				font-family:serif;
 				font-size:2.2em;
+				
+				text:black;
+			}
+			
+			.tabs a:link, .tabs a:visited, .tabs a:active {
+			  color: Black;
+			  text-decoration:none;
+
+			}
+			
+			.tabs a:hover {
+			  color:rgb(60, 60, 70);
+			  font-size:2.3m;
+
 			}
 			
 			#tab1 {
-				border-left:1px solid;
 				left:6%;
 			
 			}
@@ -71,6 +84,6 @@
 
 			}
 			
-			
+		
 			
 			
