@@ -1,0 +1,76 @@
+			
+			body {
+				font-family:cursive;
+
+			}
+					
+			#header {
+				position:fixed;
+				left:0;
+				top:0;
+				
+				margin:0;
+				padding:0;
+				width:100%;
+				height:50px;
+								
+				
+				background-color:rgb(11, 170, 181);
+			}
+			
+			#HeaderLogo {
+				position:absolute;
+				margin-top:2.5px;
+				height:90%;
+				left:0.7%;
+			}
+			
+			.tabs {
+				border-left:1px solid;
+				position:absolute;
+				top:0;
+				
+				margin:0;
+				width:15.66%;
+				height:100%;
+				
+				text-align:center;
+				font-family:serif;
+				font-size:2.2em;
+			}
+			
+			#tab1 {
+				border-left:1px solid;
+				left:6%;
+			
+			}
+			
+			#tab2 {
+				left:21.66%;
+
+			}
+			
+			#tab3{
+
+				left:37.33%;
+
+			}
+			
+			#tab4 {
+				left:52%;
+
+			}
+			
+			#tab5 {
+				left:68.66%;
+
+			}
+			
+			#tab6 {
+				left:84.33%;
+
+			}
+			
+			
+			
+			
