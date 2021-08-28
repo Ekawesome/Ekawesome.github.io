@@ -2,27 +2,24 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Emmit's Website/JS</title>
+        <title>Emmit's Website/Dog</title>
         <link rel="stylesheet" href="MainStyle.css" types="text/css">
 		
 		<style>
-		
-			
-			#myCanvas {
-				position:absolute;
-				left:20%;
-				top:10%;
-				width:60%;
-				
+			#Falla1 {
+			position:aboslute;
+				width:100%;
 			}
-			
-			
         </style>
         
     </head>
     <body>
 		<div id="header">
+		
 			<img id="HeaderLogo" src="LD_logo.png">
+			
+			
+			
 			
 			<h2 id="tab1" class="tabs"><a href="index.html"><!--style="background-color:rgb(11, 150, 181)"-->Home</a></h2>
 			<h2 id="tab2" class="tabs"><a href="DogPage.html">Dog</a></h2>
@@ -31,64 +28,26 @@
 			<h2 id="tab5" class="tabs"><a href="?">?</a><h2>
 			<h2 id="tab6" class="tabs"><a href="?">?</a><h2>
 			
+			
+			
 		</div>
 		
 		<div id="body">
-			
-			
-				<canvas id="myCanvas" width="400px" height="400px" style="border:1px solid black;"> </canvas>
-			
-			
-			
+		
+		
+		
+		<img  id="Falla1" src="Falla1.JPG">
+        <!--<img id="pic2" src="https://www.kasandbox.org/programming-images/space/planet.png">-->
+        
+        
 		</div>
 		
-		<script>
-        var canvas = document.getElementById("myCanvas");
-        var ctx = canvas.getContext("2d");
-        
-        var xPosition = 10;
-        var adding = 1;
-       
-       
-        
-        setInterval(function(){
-            
-        ctx.fillStyle = "green"; // set fill color
-        ctx.fillRect(0, 0, canvas.width, canvas.height); // fill canvas aka background
-            
-        
-        xPosition = xPosition + adding;
-        
-        if (xPosition > 400) {
-            adding = adding*-1;
-        } else if(xPosition < 0) {
-            adding = adding*-1;
-        } else {}
-        
-        
-        
-        ctx.fillStyle = "blue"//set fill color
-        
-        ctx.font = "30px Arial"; // set size and font
-        ctx.fillText("Ball's x position is: "+ xPosition, 10, 50); // write text that is filled
-            
-        ctx.beginPath(); // beginng path
-        ctx.arc(xPosition, 200, 40, 0, 2 * Math.PI); // CREATING PATH
-        
-        ctx.fillStyle = "black"; //set fill color
-        ctx.fill();// filling
-        ctx.stroke(); // dowing the drawing
-            
-        }, 10)
-        
-        
-        
-            
-            
-        </script>
 		
+        
+        
 		
     </body>
 </html>
+
 
 
