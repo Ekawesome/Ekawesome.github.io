@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Emmit's Website/Drawing</title>
+        <link rel="stylesheet" href="MainStyle.css" types="text/css">
+		
+		<style>
+		body{
+		overflow:hidden;
+		}
+		
+		#body {
+			border:0px solid;
+			position:absolute;
+			top:50px;
+			left:0px;
+			width:100%;
+			z-index:1;
+			overflow:hidden;
+			
+			
+		}
+		
+		#myCanvas {
+            margin:0;
+            position:absolute;
+			width:100%;
+            top:50px;
+            left:0;
+            z-index:2;
+			overflow:auto;
+        }
+        
+        #toolBar{
+            position:absolute;
+            border-bottom:1px solid;
+            height:50px;
+            width:100%;
+            margin:0;
+            top:0px;
+            left:0;
+            background:rgb(235, 235, 235);
+            
+        }
+        
+        .option {
+            border-right:1px solid;
+            height:50px;
+            position:absolute;
+            margin:0;
+            width:10%;
+            z-index:5;
+        }
+        
+        #color {
+            width:150px;
+            height:50px;
+            z-index:4;
+            border-right:0px solid;
+            border-bottom:1px solid;
+        }
+        
+        #width {
+            left:150px;
+            border-left:1px solid;
+            border-bottom:1px solid;
+            width:180px;
+        }
+        
+        #lineType{
+            border:0px solid;
+            right:45%;
+            width:15%;
+        }
+        
+        #fill{
+            border:0px solid;
+            left:60%;
+            width:15%;
+        }
+        
+        #clear{
+            border-left:1px solid;
+            left:330px;
+            width:130px;
+            text-align:center;
+            padding-bottom:0;
+            font-size:35px;
+            
+        } 
+        </style>
+        
+    </head>
+    <body>
+		<div id="header">
+			<img id="HeaderLogo" src="LD_logo.png">
+			
+			<h2 id="tab1" class="tabs"><a href="index.html"><!--style="background-color:rgb(11, 150, 181)"-->Home</a></h2>
+			<h2 id="tab2" class="tabs"><a href="DogPage.html">Dog</a></h2>
+			<h2 id="tab3" class="tabs"><a href="jsPage.html">JS</a><h2>
+			<h2 id="tab4" class="tabs"><a href="drawingPage.html">Drawing</a><h2>
+			<h2 id="tab5" class="tabs"><a href="?">?</a><h2>
+			<h2 id="tab6" class="tabs"><a href="?">?</a><h2>
+			
+		</div>
+		
+		<div id="body">
+		
+		
+		
+			<div id="toolBar">
+        
+				<canvas id="color" class="option"></canvas>
+				<canvas id="width" class="option"> </canvas>
+				<div id="clear" class="option"></div>
+        
+			</div>
+        
+            <canvas id="myCanvas">
+			
+			
+		
+		</div>
+		
+		<script>
+		
+			window.addEventListener("load", function(){
+            const canvas = document.querySelector("#myCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            
+            var color = document.querySelector("#color")
+                var ctx3 = color.getContext("2d");
+            var width = document.querySelector("#width")
+                var ctx2 = width.getContext("2d");
+           // var lineType = document.querySelector("#lineType")
+           // var fill = document.querySelector("#fill")
+            var clear = document.querySelector("#clear")
+            
+            
+            //color selector
+            var colorNum = 0;
+            var paintColor = "Black";
+            var colorheight = 50;
+            
+            ctx3.font = "50px arial";
+            
+            function colorPaletO() {
+                ctx3.fillStyle = "rgb(235, 235, 235)";
+                ctx3.fillRect(0, 0, color.width, color.height);
+                
+                ctx3.fillStyle = "black"
+                ctx3.font = "20px serif";
+                ctx3.fillText(paintColor, 170, 20)
+                
+                ctx3.beginPath();
+                ctx3.fillRect(30, 25, 105, 20);
+                ctx3.fillStyle = "white";
+                ctx3.fillRect(165, 25, 105, 20);
+                ctx3.fillStyle = "red";
+                ctx3.fillRect(30, 50, 105, 20);
+                ctx3.fillStyle = "orange";
+                ctx3.fillRect(165, 50, 105, 20);
+                ctx3.fillStyle = "yellow";
+                ctx3.fillRect(30, 75, 105, 20);
+                ctx3.fillStyle = "green";
+                ctx3.fillRect(165, 75, 105, 20);
+                ctx3.fillStyle = "blue";
+                ctx3.fillRect(30, 100, 105, 20);
+                ctx3.fillStyle = "purple";
+                ctx3.fillRect(165, 100, 105, 20);
+                ctx3.fillStyle = "gold";
+                ctx3.fillRect(30, 125, 105, 20);
+                ctx3.fillStyle = "silver";
+                ctx3.fillRect(165, 125, 105, 20);
+                
+                ctx3.stroke();
+            }
+            function colorPaletC() {
+                ctx3.fillStyle = "rgb(235, 235, 235)";
+                ctx3.fillRect(0, 0, color.width, color.height);
+                
+                ctx3.fillStyle = "black"
+                ctx3.font = "50px serif";
+                ctx3.fillText(paintColor, 130, 85)
+                ctx3.stroke();
+                
+                ctx3.fillStyle = paintColor;
+                ctx3.fillRect(20, 25, 90, 100)
+            } colorPaletC();
+            function colorHover(e3){
+                if (colorheight < 300) {
+                    colorheight+= 20;
+                }
+                canvas.style.left = "150px";
+                color.style.height = (colorheight + "px");
+                
+                colorPaletO();
+                
+                
+            }
+            function colorNHover() {
+                colorheight = 50;
+                canvas.style.left = "0px";
+                color.style.height = (colorheight + "px");
+                
+                colorPaletC();
+                
+            }
+            function changeColor(e3) {
+                
+                colorPaletO();
+                
+
+                
+                if (e3.clientX < 70 && e3.clientY > 95 && e3.clientY < 145) {
+                    paintColor = "Black";
+                    console.log("test");
+                }else if (e3.clientX > 80 && e3.clientY > 95 && e3.clientY < 145) {
+                    paintColor = "white";
+                }else if (e3.clientX < 70 && e3.clientY > 145 && e3.clientY < 200) {
+                    paintColor = "Red";
+                }else if (e3.clientX > 80 && e3.clientY > 145 && e3.clientY < 200) {
+                    paintColor = "Orange";
+                }else if (e3.clientX < 70 && e3.clientY > 155 && e3.clientY < 250) {
+                    paintColor = "Yellow";
+                }else if (e3.clientX > 80 && e3.clientY > 155 && e3.clientY < 250) {
+                    paintColor = "Green";
+                }else if (e3.clientX < 70 && e3.clientY > 250  && e3.clientY < 300) {
+                    paintColor = "Blue";
+                } else if (e3.clientX > 80 && e3.clientY > 250  && e3.clientY < 300) {
+                    paintColor = "Purple";
+                }else if (e3.clientX < 70 && e3.clientY > 300) {
+                    paintColor = "Gold";
+                }else if (e3.clientX > 80 && e3.clientY > 300) {
+                    paintColor = "Sliver";
+                }
+                
+                colorPaletO();
+                
+                
+               
+                
+            }
+            
+            
+            //width selector
+            var paintWidth = 5;
+            var xPos = 1;
+            function widthIn (){
+                ctx2.lineWidth = 1;
+                ctx2.beginPath();
+                ctx2.moveTo(50, 75);
+                ctx2.lineTo(250, 50);
+                ctx2.lineTo(250, 100);
+                ctx2.lineTo(50, 75);
+                ctx2.fillStyle = "grey";
+                ctx2.fill();
+                ctx2.stroke();
+                
+                if (paintWidth < 1) {paintWidth = 1}
+                if (paintWidth > 50) {paintWidth = 50}
+                xPos = (60 + (paintWidth - 1)*180/50)
+                
+                
+                ctx2.lineWidth = 5;
+                ctx2.moveTo(xPos, 40);
+                ctx2.lineTo(xPos, 110);
+                ctx2.stroke()
+                
+                ctx2.fillStyle = "Black";
+                ctx2.font = "35px Arial"
+                ctx2.fillText(paintWidth, 5, 88)
+                ctx2.stroke(); } widthIn();
+            function changeWidth(e2){
+                
+                ctx2.fillStyle = "rgb(235, 235, 235)";
+                ctx2.fillRect(2, 0, 300, 200);
+                
+                ctx2.lineWidth = 1;
+                ctx2.beginPath();
+                ctx2.moveTo(50, 75);
+                ctx2.lineTo(250, 50);
+                ctx2.lineTo(250, 100);
+                ctx2.lineTo(50, 75);
+                ctx2.fillStyle = "grey";
+                ctx2.fill();
+                ctx2.stroke();
+                
+                //190 - 295
+                
+                //paintWidth = ((e2.clientX-127)/110*50);
+                paintWidth = ((e2.clientX - 190)/105*50)
+                
+                if (paintWidth < 1) {paintWidth = 1}
+                if (paintWidth > 50) {paintWidth = 50}
+                
+                xPos = (61 + (paintWidth - 1)*190/50)
+                
+                
+                ctx2.lineWidth = 5;
+                ctx2.moveTo(xPos, 40);
+                ctx2.lineTo(xPos, 110);
+                
+                ctx2.fillStyle = "Black";
+                ctx2.font = "35px Arial"
+                ctx2.fillText(Math.round(paintWidth), 5, 88)
+                ctx2.stroke();
+                
+                
+            } 
+            
+            
+
+            //clear button
+            clear.textContent = "Clear";
+            function clearCan(){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+            }
+            
+            
+            // painting
+            var noDraw = 0;
+            let painting = false;
+            function startPosition(e){
+                painting = true;
+                draw(e);
+            }3
+            function endPosition(){
+                painting = false;
+                ctx.beginPath();
+            }
+            function draw(e){
+                
+                if(!painting) return;
+                ctx.lineWidth = paintWidth;
+                ctx.lineCap = "round";
+                ctx.strokeStyle = paintColor;
+                
+                if (e.clientY > noDraw) {
+                
+                
+                ctx.lineTo(e.clientX, e.clientY-100);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(e.clientX, e.clientY-100)
+                
+                }
+                
+            }
+            
+            
+            
+            canvas.addEventListener('mousedown',startPosition);
+            
+            canvas.addEventListener('mouseup', endPosition);
+            
+            canvas.addEventListener('mousemove', draw);
+            
+            clear.addEventListener('click', clearCan);
+            
+            width.addEventListener('click', changeWidth);
+            
+            color.addEventListener('mouseover', colorHover)
+            color.addEventListener('mousemove', colorHover)
+            
+            color.addEventListener('mouseout', colorNHover)
+            
+            color.addEventListener('click', changeColor);
+            
+
+           
+           
+        })
+        
+            
+        </script>
+		
+		
+    </body>
+</html>
