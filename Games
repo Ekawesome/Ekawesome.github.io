@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Emmit's Website/Games</title>
+        <link rel="stylesheet" href="MainStyle.css" types="text/css">
+		
+		<style>
+			#inputQuestions {
+				line-height: 2;
+				position: fixed;
+				width: 94%;
+				height: 100px;
+				padding: 20px 2%;
+				margin: 10px 1%;
+				border: 3px dotted black;
+				
+			}
+		
+			#outputCanvas {
+				position: absolute;
+				
+				border: 3px dotted black;
+				width: 50%;
+				
+				margin: 150px 1%;
+				padding: 5px 24%;
+
+			}
+        </style>
+        
+    </head>
+    <body>
+		<div id="header">
+			<img id="HeaderLogo" src="LD_logo.png">
+			
+			<h2 id="tab1" class="tabs"><a href="index.html">Home</a></h2>
+			<h2 id="tab2" class="tabs"><a href="DogPage.html">Dog</a></h2>
+			<h2 id="tab3" class="tabs"><a href="jsPage.html">JS</a><h2>
+			<h2 id="tab4" class="tabs"><a href="drawingPage.html">Drawing</a><h2>
+			<h2 id="tab5" class="tabs"><a href="Game.html">Game</a><h2>
+			<h2 id="tab6" class="tabs"><a href="?">?</a><h2>
+			
+		</div>
+		
+		<div id="body">
+
+			<div id="inputQuestions">
+			
+				<label>Stop attacking when there is 
+				<select id="stoppingPoint">
+				  <option value="5">a winner</option>
+				  <option value="4">half of defending troops left</option>
+				  <option value="3">half of attacking troops left</option>
+				  <option value="2">a few attacking troops left</option>
+				  <option value="1">minimum defending troop left</option>
+				</select>
+			
+				<br>
+			
+				<label>Attacker's number of troops: </label>
+				<input id="AtNum" type="number" min="0" max="10">
+				
+				<br> 
+				
+				<label>Defender's number of troops: 
+				<input id="DeNum" type="number" min="0" max="10">
+				
+			</div>
+			<br>
+			<canvas id="outputCanvas" width = "700px" height = "350px"> </canvas>
+
+		</div>
+		
+		<script> 
+		
+		
+		
+			var canvas = document.getElementById("outputCanvas");
+			var ctx = canvas.getContext("2d");
+			
+			//bakcground
+				
+			function blankResultDisplay() {
+				ctx.fillStyle = "rgb(255, 255, 255)"; // set fill color
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+				ctx.beginPath();
+				
+				ctx.fillStyle = "black";
+				ctx.font = "35px arial"; // set size and font
+				
+				ctx.fillText("Attacker", 75, 50); // write text that is filled
+				ctx.fillText("Defender", 490, 50);
+				
+				ctx.font = "20px arial";
+				
+				ctx.fillRect(345, 10, 10, 330);
+				ctx.fillStyle = "white";
+				ctx.fillRect(345, 100, 10, 30);
+				ctx.fillRect(345, 180, 10, 30);
+				ctx.fillRect(345, 260, 10, 30);
+				
+				ctx.fillStyle = "rgb(0, 0, 0)";
+				ctx.fillText("Starting Troops", 285, 120);
+				ctx.fillText("Total Losses", 295, 200);
+				ctx.fillText("Remaining Troops", 272, 280);
+				ctx.stroke();
+			}
+				blankResultDisplay();
+				
+			function resultDisplay(AtNum, DeNum, AtLose, DeLose) {
+			
+				ctx.fillStyle = "rgb(255, 255, 255)"; // set fill color
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+				ctx.beginPath();
+				
+				ctx.fillStyle = "black";
+				ctx.font = "35px arial"; // set size and font
+				
+				ctx.fillText("Attacker", 75, 50); // write text that is filled
+				ctx.fillText("Defender", 490, 50);
+				
+				ctx.fillText(AtNum, 120, 120);
+				ctx.fillText(DeNum, 540, 120);
+				ctx.fillText(AtLose, 120, 200);
+				ctx.fillText(DeLose, 540, 200);
+				ctx.fillText(AtNum-AtLose, 120, 280);
+				ctx.fillText(DeNum-DeLose, 540, 280);
+				
+				ctx.font = "20px arial";
+				
+				ctx.fillRect(345, 10, 10, 330);
+				ctx.fillStyle = "white";
+				ctx.fillRect(345, 100, 10, 30);
+				ctx.fillRect(345, 180, 10, 30);
+				ctx.fillRect(345, 260, 10, 30);
+				
+				ctx.fillStyle = "rgb(0, 0, 0)";
+				ctx.fillText("Starting Troops", 285, 120);
+				ctx.fillText("Total Losses", 295, 200);
+				ctx.fillText("Remaining Troops", 272, 280);
+				ctx.stroke();
+
+				
+				
+				
+				
+				
+			}
+			
+			
+			
+			function diceRole3v2() {
+			
+				var A1 = Math.ceil(Math.random() * 6);
+				var A2 = Math.ceil(Math.random() * 6);
+				var A3 = Math.ceil(Math.random() * 6);
+				var D1 = Math.ceil(Math.random() * 6);
+				var D2 = Math.ceil(Math.random() * 6);
+				
+				// sorting the 3 dice
+					var HighDice;
+					var LowDice;
+					
+					var AHigh;
+					var A2ndHigh;
+					var ALow;
+					
+					if (A1 >= A2 && A1 >= A3) {AHigh = A1; HighDice = 1;}
+					else if (A2 >= A1 && A2 >= A3) {AHigh = A2; HighDice = 2;}
+					else {AHigh = A3; HighDice = 3;}
+					
+					if (A1 <= A2 && A1 <= A3) {ALow = A1; LowDice = 1}
+					else if (A2 <= A1 && A2 <= A3) {ALow = A2; LowDice = 2}
+					else {ALow = A3; LowDice = 3}
+					
+					if (3 != HighDice && 3 != LowDice) {
+						A2ndHigh = A3;
+					} else if (1 != HighDice && 1 != LowDice) {
+						A2ndHigh = A1;
+					}else {A2ndHigh = A2;}
+					
+					
+					//console.log("role: ", A1, A2, A3, "Sort: ", AHigh, A2ndHigh, ALow, "High dice: ", HighDice, "Low Dice: ", LowDice);
+				
+				// sorting the 2 dice
+				
+					var DHigh;
+					var DLow
+					
+					if (D1 >= D2) {DHigh = D1; DLow = D2}
+					else {DHigh = D2; DLow = D1}
+					
+					//console.log("role: ", D1, D2, "Sort: ", DHigh, DLow);
+			
+				
+				// battle
+					var AttackLose = 0;
+					var DefendLose = 0;
+					
+					if (DHigh >= AHigh) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+					
+					if (DLow >= A2ndHigh) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+					
+					console.log("Attacker Role:", A1, A2, A3, " Defender Role:", D1, D2, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+					
+					return(AttackLose);
+					
+			}
+			
+			function diceRole2v2() {
+			
+				//role
+					var A1 = Math.ceil(Math.random() * 6);
+					var A2 = Math.ceil(Math.random() * 6);
+					var D1 = Math.ceil(Math.random() * 6);
+					var D2 = Math.ceil(Math.random() * 6);
+				
+				//sort
+					var HighDice;
+					var LowDice;	
+					var AHigh;
+					var ALow;
+					var DHigh;
+					var DLow;
+				
+					if (A1 >= A2) {AHigh = A1; ALow = A2;}
+					else {AHigh = A2; ALow = A1}
+				
+					if (D1 >= D2) {DHigh = D1; DLow = D2}
+					else {DHigh = D2; DLow = D1}
+					
+				
+				//battle
+					var AttackLose = 0;
+					var DefendLose = 0;
+					
+					if (DHigh >= AHigh) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+						
+					if (DLow >= ALow) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+					
+				console.log("Attacker Role:", A1, A2, " Defender Role:", D1, D2," Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+				
+				return(AttackLose);
+				
+			}
+			
+			function diceRole3v1() {
+				var A1 = Math.ceil(Math.random() * 6);
+				var A2 = Math.ceil(Math.random() * 6);
+				var A3 = Math.ceil(Math.random() * 6);
+				var D1 = Math.ceil(Math.random() * 6);
+				
+				// sorting the 3 dice
+					var HighDice;
+					var AHigh;
+					
+					if (A1 >= A2 && A1 >= A3) {AHigh = A1; HighDice = 1;}
+					else if (A2 >= A1 && A2 >= A3) {AHigh = A2; HighDice = 2;}
+					else {AHigh = A3; HighDice = 3;}
+					
+				//battle
+					var AttackLose = 0;
+					var DefendLose = 0;
+					
+					if (D1 >= AHigh) {AttackLose = 1;}
+					else {DefendLose = 1;}
+					
+					
+					
+					console.log("Attacker Role:", A1, A2, A3, " Defender Role:", D1, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+					
+					return(AttackLose);
+			
+					
+				
+			}
+			
+			function diceRole2v1() {
+				//role
+					var A1 = Math.ceil(Math.random() * 6);
+					var A2 = Math.ceil(Math.random() * 6);
+					var D1 = Math.ceil(Math.random() * 6);
+				
+				//sort
+					var HighDice;
+					var LowDice;	
+					var AHigh;
+					var ALow;
+				
+					if (A1 >= A2) {AHigh = A1; ALow = A2;}
+					else {AHigh = A2; ALow = A1}
+					
+				
+				//battle
+					var AttackLose = 0;
+					var DefendLose = 0;
+					
+					if (D1 >= AHigh) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+						
+					
+					
+				console.log("Attacker Role:", A1, A2, " Defender Role:", D1, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+				
+				return(AttackLose);
+			}
+			
+			function diceRole1v2() {
+				//role
+					var A1 = Math.ceil(Math.random() * 6);
+					var D1 = Math.ceil(Math.random() * 6);
+					var D2 = Math.ceil(Math.random() * 6);
+		
+				
+				//sort	
+					var DHigh;
+				
+					if (D1 >= D2) {DHigh = A1;}
+					else {DHigh = D2}
+					
+				
+				//battle
+					var AttackLose = 0;
+					var DefendLose = 0;
+					
+					if (DHigh >= A1) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+						
+					
+					
+				console.log("Attacker Role:", A1, " Defender Role:", D1, D2, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+				
+				return(AttackLose);
+			}
+			
+			function diceRole1v1() {
+				//role
+					var A1 = Math.ceil(Math.random() * 6);
+					var D1 = Math.ceil(Math.random() * 6);
+				
+				
+				//battle
+					var AttackLose = 0;
+					var DefendLose = 0;
+					
+					if (D1 >= A1) {AttackLose = AttackLose + 1;}
+					else {DefendLose = DefendLose + 1;}
+						
+					
+					
+				console.log("Attacker Role:", A1, " Defender Role:", D1, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+				
+				return(AttackLose);
+			}
+			
+			function run(){
+				
+				var stop = document.getElementById("stoppingPoint").value;
+				var AtNum = document.getElementById("AtNum").value;
+				var DeNum = document.getElementById("DeNum").value;
+			
+				var AttackerLosses = 0;
+				var DefenderLosses = 0;
+				var stopAt;
+				var roles = 0;
+				var losses;
+
+				
+				if (stop == 5) {
+					stopAt = 0;
+				} else if(stop == 4) {
+					stopAt = -DeNum/2
+				} else if(stop == 3) {
+					stopAt = AtNum/2
+				} else if(stop == 2) {
+					stopAt = 3
+				} else { stopAt = -2}
+				
+				
+				if (stopAt >= 0) {
+					while (AtNum - AttackerLosses > stopAt) {
+						if(AtNum - AttackerLosses > 2 && DeNum - DefenderLosses > 1) {
+							losses = diceRole3v2();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 2-losses;
+							
+							roles++;
+						} else if (AtNum - AttackerLosses > 2 && DeNum - DefenderLosses == 1) {
+							losses = diceRole3v1();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses > 1) {
+							losses = diceRole2v2();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 2-losses;
+							
+							roles++;
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses == 1) {
+							losses = diceRole2v1();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						}else if (AtNum - AttackerLosses === 2 && DeNum - DefenderLosses > 1) {
+							losses = diceRole1v2();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						} else if ( AtNum - AttackerLosses === 2 && DeNum - DefenderLosses === 1) {
+							losses = diceRole1v1();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						} else {
+							break;
+						}
+						resultDisplay();
+					} 
+				} else { // stopAt < 0
+					while (DeNum - DefenderLosses > stopAt * -1) {
+						if(AtNum - AttackerLosses > 2 && DeNum - DefenderLosses > 1) {
+							losses = diceRole3v2();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 2-losses;
+							
+							roles++;
+						} else if (AtNum - AttackerLosses > 2 && DeNum - DefenderLosses == 1) {
+							losses = diceRole3v1();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses > 1) {
+							losses = diceRole2v2();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 2-losses;
+							
+							roles++;
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenerLosses == 1) {
+							losses = diceRole2v1();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						}else if (AtNum - AttackerLosses === 2 && DeNum - DefenderLosses > 1) {
+							losses = diceRole1v2();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						} else if ( AtNum - AttackerLosses === 2 && DeNum - DefenderLosses === 1) {
+							losses = diceRole1v1();
+							
+							AttackerLosses = AttackerLosses + losses;
+							DefenderLosses = DefenderLosses + 1-losses;
+							
+							roles++;
+						} else {
+							break;
+						}
+						
+						
+					}	
+				}
+				
+				console.log("Attacker Total Losses:     ", AttackerLosses, "Defender Total Losses: ", DefenderLosses);
+				console.log("Attacker Remaining Troops: ", AtNum-AttackerLosses, "Defender Remaining Troops:     ", DeNum-DefenderLosses);
+			   console.log(" ")
+			   
+				
+				resultDisplay(AtNum, DeNum, AttackerLosses, DefenderLosses);
+				
+			}
+			
+			
+			
+			
+			
+			canvas.addEventListener('click', run);
+			
+			
+			
+			
+			
+			
+			
+        </script>
+		
+		
+    </body>
+</html>
