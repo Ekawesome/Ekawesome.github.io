@@ -8,7 +8,7 @@
 		<style>
 			#inputQuestions {
 				line-height: 2;
-				position: fixed;
+				position: absolute;
 				width: 94%;
 				height: 100px;
 				padding: 20px 2%;
@@ -18,14 +18,29 @@
 			}
 		
 			#outputCanvas {
-				position: absolute;
+				position: relative;
 				
 				border: 3px dotted black;
 				width: 50%;
 				
-				margin: 150px 1%;
+				
+				margin: 150px 1% 10px 1%;
 				padding: 5px 24%;
 
+			}
+			
+			#roles {
+				line-height: 1.75;
+				position: relative;
+				
+				border: 3px dotted black;
+				
+				margin: 1px 1%;
+				padding: 5px 1%;
+				margin-bottom: 20px;
+				text-align: center;
+				font-size: 1.4vw;
+			
 			}
         </style>
         
@@ -69,8 +84,13 @@
 			</div>
 			<br>
 			<canvas id="outputCanvas" width = "700px" height = "350px"> </canvas>
+			<br>
+			<div id = "roles">
+				<p> Indiviual Role Results </p>
+			</div>
 
 		</div>
+		
 		
 		<script> 
 		
@@ -79,7 +99,8 @@
 			var canvas = document.getElementById("outputCanvas");
 			var ctx = canvas.getContext("2d");
 			
-			//bakcground
+				
+			
 				
 			function blankResultDisplay() {
 				ctx.fillStyle = "rgb(255, 255, 255)"; // set fill color
@@ -151,9 +172,10 @@
 			}
 			
 			
-			
 			function diceRole3v2() {
 			
+				
+				
 				var A1 = Math.ceil(Math.random() * 6);
 				var A2 = Math.ceil(Math.random() * 6);
 				var A3 = Math.ceil(Math.random() * 6);
@@ -208,6 +230,14 @@
 					
 					console.log("Attacker Role:", A1, A2, A3, " Defender Role:", D1, D2, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
 					
+					var results = document.getElementById('roles');
+					
+					
+					var role = document.createTextNode ("Attacker Role: " + A1  + " " + A2 + " "  + A3 + " "  + " |   Defender Role: " + D1 + " "  + D2 + " | Troops Lost: " + AttackLose + " " + DefendLose);
+					results.appendChild(role);
+					
+					
+					
 					return(AttackLose);
 					
 			}
@@ -247,6 +277,13 @@
 					
 				console.log("Attacker Role:", A1, A2, " Defender Role:", D1, D2," Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
 				
+				var results = document.getElementById('roles');
+					
+				var role = document.createTextNode ("Attacker Role: " + A1  + " " + A2 + " "  + " |   Defender Role: " + D1 + " "  + D2 + " | Troops Lost: " + AttackLose + " " + DefendLose);
+				results.appendChild(role);
+				
+			
+				
 				return(AttackLose);
 				
 			}
@@ -275,6 +312,14 @@
 					
 					
 					console.log("Attacker Role:", A1, A2, A3, " Defender Role:", D1, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
+					
+					
+					var results = document.getElementById('roles');
+					
+					var role = document.createTextNode ("Attacker Role: " + A1  + " " + A2 + " "  + A3 + " "  + " |   Defender Role: " + D1 + " | Troops Lost: " + AttackLose + " " + DefendLose);
+					results.appendChild(role);
+					
+				
 					
 					return(AttackLose);
 			
@@ -309,6 +354,13 @@
 					
 				console.log("Attacker Role:", A1, A2, " Defender Role:", D1, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
 				
+				var results = document.getElementById('roles');
+					
+					var role = document.createTextNode ("Attacker Role: " + A1  + " " + A2 +" |   Defender Role: " + D1 + " | Troops Lost: " + AttackLose + " " + DefendLose);
+					results.appendChild(role);
+					
+					
+				
 				return(AttackLose);
 			}
 			
@@ -337,6 +389,13 @@
 					
 				console.log("Attacker Role:", A1, " Defender Role:", D1, D2, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
 				
+				var results = document.getElementById('roles');
+					
+					var role = document.createTextNode ("Attacker Role: " + A1  + " |   Defender Role: " + D1 + " "  + D2 + " | Troops Lost: " + AttackLose + " " + DefendLose);
+					results.appendChild(role);
+					
+					
+				
 				return(AttackLose);
 			}
 			
@@ -357,14 +416,29 @@
 					
 				console.log("Attacker Role:", A1, " Defender Role:", D1, " Attacker Losses:", AttackLose, " Defender Losses:", DefendLose);
 				
+				var results = document.getElementById('roles');
+					
+					var role = document.createTextNode ("Attacker Role: " + A1  + " |   Defender Role: " + D1 + " | Troops Lost: " + AttackLose + " " + DefendLose);
+					results.appendChild(role);
+					
+					
+				
 				return(AttackLose);
 			}
 			
 			function run(){
 				
+				
+				
 				var stop = document.getElementById("stoppingPoint").value;
 				var AtNum = document.getElementById("AtNum").value;
 				var DeNum = document.getElementById("DeNum").value;
+				var results = document.getElementById('roles');
+				
+				results.innerHTML = "Individual Role Results"; // by getting the element and you can set the text instead of maing it and adding it to it
+				var linebreak = document.createElement("br");
+				results.appendChild(linebreak);
+				
 			
 				var AttackerLosses = 0;
 				var DefenderLosses = 0;
@@ -387,47 +461,96 @@
 				if (stopAt >= 0) {
 					while (AtNum - AttackerLosses > stopAt) {
 						if(AtNum - AttackerLosses > 2 && DeNum - DefenderLosses > 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole3v2();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 2-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else if (AtNum - AttackerLosses > 2 && DeNum - DefenderLosses == 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole3v1();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
+						
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses > 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
 							
 							roles++;
-						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses > 1) {
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole2v2();
+							
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 2-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses == 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole2v1();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						}else if (AtNum - AttackerLosses === 2 && DeNum - DefenderLosses > 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole1v2();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else if ( AtNum - AttackerLosses === 2 && DeNum - DefenderLosses === 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole1v1();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else {
 							break;
 						}
@@ -436,51 +559,100 @@
 				} else { // stopAt < 0
 					while (DeNum - DefenderLosses > stopAt * -1) {
 						if(AtNum - AttackerLosses > 2 && DeNum - DefenderLosses > 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole3v2();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 2-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else if (AtNum - AttackerLosses > 2 && DeNum - DefenderLosses == 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole3v1();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
+						
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses > 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
 							
 							roles++;
-						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses > 1) {
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole2v2();
+							
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 2-losses;
 							
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
+						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenderLosses == 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
 							roles++;
-						} else if (AtNum - AttackerLosses == 3 && DeNum - DefenerLosses == 1) {
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole2v1();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						}else if (AtNum - AttackerLosses === 2 && DeNum - DefenderLosses > 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole1v2();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else if ( AtNum - AttackerLosses === 2 && DeNum - DefenderLosses === 1) {
+							var linebreak = document.createElement("br");
+							results.appendChild(linebreak);
+							
+							roles++;
+							var theCurrentRoleNode = document.createTextNode ("Role Number: " + roles + "  |  ")
+							results.appendChild(theCurrentRoleNode);
+							
 							losses = diceRole1v1();
 							
 							AttackerLosses = AttackerLosses + losses;
 							DefenderLosses = DefenderLosses + 1-losses;
 							
-							roles++;
+							var theCurrentTroopCount = document.createTextNode ("  | Troops Left: " + (AtNum - AttackerLosses) + " vs " + (DeNum - DefenderLosses));
+							results.appendChild(theCurrentTroopCount);
 						} else {
 							break;
 						}
-						
+						resultDisplay();
 						
 					}	
 				}
@@ -497,14 +669,11 @@
 			
 			
 			
-			
 			canvas.addEventListener('click', run);
 			
 			
-			
-			
-			
-			
+				
+				
 			
         </script>
 		
