@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <!--things to fix
@@ -5,6 +6,7 @@
 	layout of game
 	link from logo
 	pictures of code tab or place
+	web storage
 
 -->
     <head>
@@ -13,10 +15,58 @@
         <link rel="stylesheet" href="MainStyle.css" types="text/css">
 		
 		<style>
-			#myCanvas {
-				position:realative;
-				margin:10px;
+			#bodyContent{
+				position: fixed;
+				left: 17%;
+				
+				width: 64%;
+				height: 89%;
+				
+				margin: 0%;
+				padding: 1%;
+				
+				text-indent: 1em;
+				line-height: 1.5;
+				overflow-y: scroll;
+			
 			}
+		
+			#logoLeft{
+				position: fixed;
+				width: 15%;
+				height: 98%;
+				margin: 0%;
+				padding: 1%;
+				border-right: 3px dotted black;
+				left: 0%;
+				
+
+			
+			
+			}
+			
+			#logoRight{
+			
+				position: fixed;
+				width: 15%;
+				height: 98%
+				margin: 0%;
+				padding: 1%;
+				border-left: 3px dotted black;	
+				right: 0%;	
+				
+			}
+			
+			#pageTitle{
+				text-align: center;
+			
+			}
+			
+			#locationResult{
+				text-indent: 0;
+			}
+			
+			
         </style>
         
     </head>
@@ -24,74 +74,86 @@
 		<div id="header">
 			<img id="HeaderLogo" src="LD_logo.png">
 			
-			<h2 id="tab1" class="tabs"><a href="index.html"><!--style="background-color:rgb(11, 150, 181)"-->Home</a></h2>
+			<h2 id="tab1" class="tabs" style="background-image: linear-gradient(to right, rgb(11, 170, 181), rgb(11, 130, 181), rgb(11, 170, 181))" ><a href="index.html">Home</a></h2>
 			<h2 id="tab2" class="tabs"><a href="DogPage.html">Dog</a></h2>
 			<h2 id="tab3" class="tabs"><a href="jsPage.html">JS</a><h2>
 			<h2 id="tab4" class="tabs"><a href="drawingPage.html">Drawing</a><h2>
 			<h2 id="tab5" class="tabs"><a href="Games.html">Games</a><h2>
-			<h2 id="tab6" class="tabs"><a href="?">?</a><h2>
+			<h2 id="tab6" class="tabs"><a href="Animations.html">Animations</a><h2>	
 			
 		</div>
 		
 		<div id="body">
 			
-			<h1>Emmit Knutson's Website</h1>
+			<div id="bodyContent">
 			
-			<img  src="LD_logo.png">
-			<img  src="LD_logo.png">
+				<h1 id="pageTitle" style="text-shadow: 0 0 3px blue, 0 0 5px blue" >Emmit Knutson Website</h1>
+				
+				<h3> Lazy Dog Anamations and Tech was founded by Emmit James Knutson in 2018. It orginaly started with created short flip book movies on google slides but has now grown to create 
+				a variety of products. The logo for the company came along about 2 months later than the company. The only real meaning is that it is an "E" for Emmit but besides that it just looks
+				cool. </h3>
+				<br>
+				<h3> 
+					This website was created in August 25th, 2021 and has grown from just one page to a multi-platform website with multiple pages including interactive activities and useful
+					and fun programs.
+				<h3>
+				
+				<button onclick="getLocation()">My Location	</button>
+				<p id="locationResult"></p>
+				
+				<h3>
+					so basicaly i am no typing more stuff to fill up the page so that I can test something out. Here is a wycapedia on dogs.
+					The dog or domestic dog (Canis familiaris[4][5] or Canis lupus familiaris[5]) is a domesticated descendant of the wolf which is characterized by an upturning tail. The dog is derived from an ancient, extinct wolf,[6][7] and the modern wolf is the dog's nearest living relative.[8] The dog was the first species to be domesticated,[9][8] by hunter–gatherers over 15,000 years ago,[7] before the development of agriculture.[1]
+
+Due to their long association with humans, dogs have expanded to a large number of domestic individuals[10] and gained the ability to thrive on a starch-rich diet that would be inadequate for other canids.[11] Over the millennia, dogs became uniquely adapted to human behavior, and the human-canine bond has been a topic of frequent study.[12]
+
+The dog has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes.[13] Dog breeds vary widely in shape, size, and color. They perform many roles for humans, such as hunting, herding, pulling loads, protection, assisting police and the military, companionship, therapy, and aiding disabled people. This influence on human society has given them the sobriquet of "man's best friend".
+				
+				</h3>
+			</div>
+			<div id="logoLeft">
+
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
 			
-			<canvas id="myCanvas" width="400px" height="400px" style="border:1px solid black;"> </canvas>
+			</div>
 			
-			<img  src="LD_logo.png">
+			<div id="logoRight">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+				<img width="100%" src="LD_logo.png">
+			
+			</div>
+			
+			
+			
 			
 		</div>
 		
-		<script> <!--all of the java script is in here takes things from the html and manipultes them in java script>
+		<script>
 		
-        var canvas = document.getElementById("myCanvas"); // gets the element "myCanvas" that was previously created and stores it 
-        var ctx = canvas.getContext("2d"); // get the context/ the stuff inside and stores it as a var "ctx". To beable to eddit it 
-        
-		//global variables for later
-        var xPosition = 10; //x position of ball that will be changed
-        var adding = 1; // number being added to the x position of ball, aka the speed
-       
-       
-        
-        setInterval(function(){ //setInterval calls what is inside of it prepetadly and updates it. It calles it a sertain about of times determined by the number at the end
-            //dont know why it has to be in a function but maybe becuase the setInterval has to call a function of something
-			
-			ctx.fillStyle = "green"; // set fill color
-			ctx.fillRect(0, 0, canvas.width, canvas.height); // fill canvas aka background
-				
-			
-			xPosition = xPosition + adding;//ball moving code
-			
-			if (xPosition > 400) { //ball bouncing code
-				adding = adding*-1;
-			} else if(xPosition < 0) {
-				adding = adding*-1;
-			} else {}
-			
-			
-			
-			ctx.fillStyle = "blue"//set fill color
-			
-			ctx.font = "30px Arial"; // set size and font
-			ctx.fillText("Ball's x position is: "+ xPosition, 10, 50); // write text that is filled
-				
-			ctx.beginPath(); // beginng path
-			ctx.arc(xPosition, 200, 40, 0, 2 * Math.PI); // CREATING PATH for the circle
-			
-			ctx.fillStyle = "black"; //set fill color
-			ctx.fill();// filling
-			ctx.stroke(); // dowing the drawing
-				
-        }, 10) //10 is the number of times that the inside function is calle/ the frame rate
-        
-        
-        
-            
-            
+			var x = document.getElementById("locationResult");
+			function getLocation() {
+			  if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition);
+			  } else {
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			  }
+			}
+
+			function showPosition(position) {
+			  x.innerHTML = "Latitude: " + position.coords.latitude +
+			  "<br>Longitude: " + position.coords.longitude;
+			}
+
+		
         </script>
 		
 		
