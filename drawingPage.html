@@ -99,9 +99,9 @@
 			<h2 id="tab1" class="tabs"><a href="index.html"><!--style="background-color:rgb(11, 150, 181)"-->Home</a></h2>
 			<h2 id="tab2" class="tabs"><a href="DogPage.html">Dog</a></h2>
 			<h2 id="tab3" class="tabs"><a href="jsPage.html">JS</a><h2>
-			<h2 id="tab4" class="tabs"><a href="drawingPage.html">Drawing</a><h2>
+			<h2 id="tab4" class="tabs" style="background-image: linear-gradient(to right, rgb(11, 170, 181), rgb(11, 130, 181), rgb(11, 170, 181))"><a href="drawingPage.html">Drawing</a><h2>
 			<h2 id="tab5" class="tabs"><a href="Games.html">Games</a><h2>
-			<h2 id="tab6" class="tabs"><a href="?">?</a><h2>
+			<h2 id="tab6" class="tabs"><a href="Animations.html">Animations</a><h2>
 			
 		</div>
 		
@@ -125,29 +125,27 @@
 		
 		<script>
 		
-			window.addEventListener("load", function(){
-            const canvas = document.querySelector("#myCanvas");
-            const ctx = canvas.getContext("2d");
-            canvas.height = window.innerHeight;
-            canvas.width = window.innerWidth;
+			window.addEventListener("load", function(){ // this waits till the wntire window has loaded then exicutes what is inside. this is to ensure everything is loaded and it all starts on the same page
+            const canvas = document.querySelector("#myCanvas"); // this declares a variable of "canvas" exapt it cant be changed, could have done var but this just makes it more reliable
+            const ctx = canvas.getContext("2d"); // in other JS i did getElementById which would find it by ID, but this querySelector gets the element and you have to specify the catigory in this case # for id
+            canvas.height = window.innerHeight; // this sets the hight of the canvas to always be the hight of the window, not sure abou this one?
+            canvas.width = window.innerWidth; //sets the width to the width of the window
             
-            var color = document.querySelector("#color")
+            var color = document.querySelector("#color") // this gets another cavas of the color picker
                 var ctx3 = color.getContext("2d");
-            var width = document.querySelector("#width")
+            var width = document.querySelector("#width") // gets the brush width selector and stores it into the "width" var
                 var ctx2 = width.getContext("2d");
            // var lineType = document.querySelector("#lineType")
            // var fill = document.querySelector("#fill")
-            var clear = document.querySelector("#clear")
+            var clear = document.querySelector("#clear") // stores the canvas of the clear button and puts it into the var "clear"
             
             
             //color selector
-            var colorNum = 0;
-            var paintColor = "Black";
-            var colorheight = 50;
-            
-            ctx3.font = "50px arial";
-            
-            function colorPaletO() {
+            var colorNum = 0; // the colors that are optional are asigned a number to make it easy
+            var paintColor = "Black"; // this creats the paint color var and just asgins black as default
+            var colorheight = 50; //i think is is the hight of the color picker area
+            ctx3.font = "50px arial"; // changes the font of the color picker to arial
+            function colorPaletO() { // this draws out the color palet that drops down, O is for open
                 ctx3.fillStyle = "rgb(235, 235, 235)";
                 ctx3.fillRect(0, 0, color.width, color.height);
                 
@@ -178,7 +176,7 @@
                 
                 ctx3.stroke();
             }
-            function colorPaletC() {
+            function colorPaletC() { // this draws the current color picked, C for Closed
                 ctx3.fillStyle = "rgb(235, 235, 235)";
                 ctx3.fillRect(0, 0, color.width, color.height);
                 
@@ -190,26 +188,26 @@
                 ctx3.fillStyle = paintColor;
                 ctx3.fillRect(20, 25, 90, 100)
             } colorPaletC();
-            function colorHover(e3){
+            function colorHover(e3){ // this is for when the mouse is in te right spot and the palet should be opened
                 if (colorheight < 300) {
                     colorheight+= 20;
                 }
                 canvas.style.left = "150px";
                 color.style.height = (colorheight + "px");
                 
-                colorPaletO();
+                colorPaletO(); // draws the open color palet
                 
                 
             }
-            function colorNHover() {
+            function colorNHover() { // this is for when the mouse is not on hovoring there and should be closed
                 colorheight = 50;
                 canvas.style.left = "0px";
                 color.style.height = (colorheight + "px");
                 
-                colorPaletC();
+                colorPaletC(); //draws the palet closed
                 
             }
-            function changeColor(e3) {
+            function changeColor(e3) { //this function is for changing the color 
                 
                 colorPaletO();
                 
@@ -217,7 +215,7 @@
                 
                 if (e3.clientX < 70 && e3.clientY > 95 && e3.clientY < 145) {
                     paintColor = "Black";
-                    console.log("test");
+                    //console.log("test");
                 }else if (e3.clientX > 80 && e3.clientY > 95 && e3.clientY < 145) {
                     paintColor = "white";
                 }else if (e3.clientX < 70 && e3.clientY > 145 && e3.clientY < 200) {
@@ -246,10 +244,11 @@
             }
             
             
+			
             //width selector
             var paintWidth = 5;
             var xPos = 1;
-            function widthIn (){
+            function widthIn (){ //this draws the width chooser
                 ctx2.lineWidth = 1;
                 ctx2.beginPath();
                 ctx2.moveTo(50, 75);
@@ -274,7 +273,7 @@
                 ctx2.font = "35px Arial"
                 ctx2.fillText(paintWidth, 5, 88)
                 ctx2.stroke(); } widthIn();
-            function changeWidth(e2){
+            function changeWidth(e2){ // this is the function for acualy changing it
                 
                 ctx2.fillStyle = "rgb(235, 235, 235)";
                 ctx2.fillRect(2, 0, 300, 200);
@@ -316,25 +315,30 @@
 
             //clear button
             clear.textContent = "Clear";
-            function clearCan(){
+            function clearCan(){ //this is the function to draw and exicute the clear button
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
+				canvas.height = window.innerHeight; // this sets the hight of the canvas to always be the hight of the window, not sure abou this one?
+				canvas.width = window.innerWidth; //sets the width to the width of the window
             }
             
             
             // painting
             var noDraw = 0;
             let painting = false;
-            function startPosition(e){
+            function startPosition(e){ //just says that a line has started
                 painting = true;
                 draw(e);
+				
             }3
-            function endPosition(){
+            function endPosition(){ //says that a line has ended
                 painting = false;
                 ctx.beginPath();
             }
-            function draw(e){
+            function draw(e){ //draws it 
                 
+				
+				
                 if(!painting) return;
                 ctx.lineWidth = paintWidth;
                 ctx.lineCap = "round";
@@ -354,20 +358,23 @@
             
             
             
-            canvas.addEventListener('mousedown',startPosition);
+            canvas.addEventListener('mousedown',startPosition); //activates the startPosition function when the mouse if pressed
+            canvas.addEventListener('touchstart', startPosition); // this was an atempt to get touch screen did not seem to work
+			
+            canvas.addEventListener('mouseup', endPosition); // activates the endPosition when the mouse is realesed
+            canvas.addEventListener('touchend', endPosition);
+			
+            canvas.addEventListener('mousemove', draw); // activates the draw function when the mouse is moving
+            canvas.addEventListener('touchmove', draw);
+			
+            clear.addEventListener('click', clearCan); // if the mouse is clicked within the clear canvas then the funciton clearCan is activated
             
-            canvas.addEventListener('mouseup', endPosition);
+            width.addEventListener('click', changeWidth); // if there is a click within the width canvas then the chnage
             
-            canvas.addEventListener('mousemove', draw);
+            color.addEventListener('mouseover', colorHover); //i think you get the idea
+            color.addEventListener('mousemove', colorHover);
             
-            clear.addEventListener('click', clearCan);
-            
-            width.addEventListener('click', changeWidth);
-            
-            color.addEventListener('mouseover', colorHover)
-            color.addEventListener('mousemove', colorHover)
-            
-            color.addEventListener('mouseout', colorNHover)
+            color.addEventListener('mouseout', colorNHover);
             
             color.addEventListener('click', changeColor);
             
