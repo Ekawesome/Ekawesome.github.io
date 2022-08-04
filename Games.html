@@ -6,6 +6,35 @@
         <link rel="stylesheet" href="MainStyle.css" types="text/css">
 		
 		<style>
+			#body {
+				overflow: hidden;
+			}
+		
+			#gameList {
+				position: absolute;
+				height: 90.5%;
+				left: 1%;
+				width: 12%;
+				
+				margin: 1%;
+				padding: 1%;
+				
+				border: 1px solid black;
+			}
+			
+			#riskRoller{
+				position: absolute;
+				border: 1px solid black;
+				margin: 1%;
+				left: 17%;
+				height: 95%;
+				width: 80%;
+				overflow-y: scroll;
+				overflow-x: hidden;
+				
+			}
+		
+		
 			#inputQuestions {
 				font-family: arial;
 				line-height: 2;
@@ -54,42 +83,48 @@
 			<h2 id="tab2" class="tabs"><a href="DogPage.html">Dog</a></h2>
 			<h2 id="tab3" class="tabs"><a href="jsPage.html">JS</a><h2>
 			<h2 id="tab4" class="tabs"><a href="drawingPage.html">Drawing</a><h2>
-			<h2 id="tab5" class="tabs"><a href="Game.html">Game</a><h2>
+			<h2 id="tab5" class="tabs"style="background-image: linear-gradient(to right, rgb(11, 170, 181), rgb(11, 130, 181), rgb(11, 170, 181))"><a href="Game.html">Game</a><h2>
 			<h2 id="tab6" class="tabs"><a href="Animations.html">Animations</a><h2>
 			
 		</div>
 		
 		<div id="body">
-
-			<div id="inputQuestions"><b>
-			
-				<label>Stop attacking when there is 
-				<select id="stoppingPoint">
-				  <option value="5">a winner</option>
-				  <option value="4">half of defending troops left</option>
-				  <option value="3">half of attacking troops left</option>
-				  <option value="2">a few attacking troops left</option>
-				  <option value="1">minimum defending troop left</option>
-				</select>
-			
+			<div id="gameList">
+				<h2>Risk Roller</h2>
 				<br>
+				<h2>soon to be: Pong</h2>
+			</div>
+			<div id= "riskRoller">
+				<div id="inputQuestions"><b>
+				
+					<label>Stop attacking when there is 
+					<select id="stoppingPoint">
+					  <option value="5">a winner</option>
+					  <option value="4">half of defending troops left</option>
+					  <option value="3">half of attacking troops left</option>
+					  <option value="2">a few attacking troops left</option>
+					  <option value="1">minimum defending troop left</option>
+					</select>
+				
+					<br>
+				
+					<label>Attacker's number of troops: </label>
+					<input id="AtNum" type="number" min="0" max="10">
+					
+					<br> 
+					
+					<label>Defender's number of troops: 
+					<input id="DeNum" type="number" min="0" max="10">
+					</b>
+				</div>
+				<br>
+				<canvas id="outputCanvas" width = "700px" height = "350px"> </canvas>
+				<br>
+				<div id = "roles">
+					<p> Indiviual Role Results </p>
+				</div>
+			</div>
 			
-				<label>Attacker's number of troops: </label>
-				<input id="AtNum" type="number" min="0" max="10">
-				
-				<br> 
-				
-				<label>Defender's number of troops: 
-				<input id="DeNum" type="number" min="0" max="10">
-				</b>
-			</div>
-			<br>
-			<canvas id="outputCanvas" width = "700px" height = "350px"> </canvas>
-			<br>
-			<div id = "roles">
-				<p> Indiviual Role Results </p>
-			</div>
-
 		</div>
 		
 		
